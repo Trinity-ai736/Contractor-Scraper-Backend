@@ -12,7 +12,9 @@ from api.routes import jobs, keywords, contractors, classification, health, auth
 
 load_dotenv()
 
-FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:5173")
+# Support comma-separated list of allowed origins via FRONTEND_URL env var
+_raw_frontend_url = os.getenv("FRONTEND_URL", "http://localhost:5173")
+FRONTEND_URLS = [u.strip() for u in _raw_frontend_url.split(",") if u.strip()]
 
 
 @asynccontextmanager
@@ -37,7 +39,11 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[FRONTEND_URL, "http://localhost:5173", "http://localhost:3000"],
+    allow_origins=[
+        *FRONTEND_URLS,
+        "http://localhost:5173",
+        "http://localhost:3000",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
