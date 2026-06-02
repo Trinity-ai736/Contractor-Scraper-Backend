@@ -94,11 +94,7 @@ export default function Login() {
             )}
           </button>
 
-          <div className="rounded-md bg-muted/50 p-3 text-xs text-muted-foreground">
-            <div className="font-medium text-foreground mb-1">Test credentials</div>
-            <div>Email: <code className="font-mono">test@example.com</code></div>
-            <div>Password: <code className="font-mono">123456</code></div>
-          </div>
+
         </form>
       </div>
     </div>
